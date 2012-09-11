@@ -3,16 +3,28 @@
 <head>
   <title>Realtimegram</title>
   <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <header>
-    <h1>Realtimegram</h1>
-  </header>
-  <div id="app"></div>
-  <form method="POST" action="/">
-  	<h1>Hi there, upload a photo!</h1>
-  	<input type="file">
-  </form>
+  <div id="container">
+    <header>
+      <h1>Realtimegram</h1>
+    </header>
+    <div id="app"></div>
+  </div>
+  <script id="imageTemplate" type="text/template">
+    <div class="media">
+      <img src="<%= href %>" />
+      <h2>title</h2>
+    </div>
+  </script>
+  <script id="formTemplate" type="text/template">
+    <button type="button" id="formtoggler">Show form</button>
+    <form method="POST" action="/">
+      <h1>Hi there, upload a photo!</h1>
+      <input type="file" name="file">
+    </form>
+  </script>
   <script src="jquery-1.8.1.min.js"></script>
   <script src="underscore.js"></script>
   <script src="backbone.js"></script>
