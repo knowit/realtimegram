@@ -13,16 +13,31 @@ var ports = seaport.connect('localhost', 5001);
 
 var app = express();
 
-var pusherStream;
+MAX_IMG_SIZE = 1024 * 2048;
 
 app.post('/', function(req, res) {
 	res.setHeader('content-length', 0);
+
+	// Make sure the user gets redirected back to the front page
+	res.setHeader('Location', '/wegeg');
+
+	if(req['content-length'] > MAX_IMG_SIZE) {
+		res.statusCode = 413;
+		res.end();
+	}
 
 	// Set up a parser to parse the binary multipart form data.
 	var form = new formidable.IncomingForm();
 
 	// Prepare to handle the form data.
 	form.onPart = function(part) {
+		// If upload isn't an image respond with a
+		// "415 Unsupported Media Type"
+		if(!part.mime.match(/image/)) {
+			res.statusCode = 415;
+			res.end();
+		}
+
 		// Make a new file with the same filename as the user's.
 		var filename = part.filename;
 		var fileExt = path.extname(part.filename);
@@ -52,6 +67,11 @@ app.post('/', function(req, res) {
 				// Update pusher about new upload
 				updatePusher(newName);
 			});
+		});
+
+		newFile.on('error', function() {
+			res.statusCode = 500;
+			res.end();
 		});
 	};
 
