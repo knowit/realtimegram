@@ -4,8 +4,10 @@
       this.id = this.get('href');
     }
   });
+
   var Images = Backbone.Collection.extend({
     model: Image,
+
     comparator: function(model) {
       return model.get('date');
     }
@@ -51,16 +53,24 @@
 
   var UploadForm = Backbone.View.extend({
     template: _.template($('#formTemplate').html()),
+
     className: 'formcontainer',
+
     events: {
-      'click #formtoggler': 'showForm'
+      'click #formtoggler': 'toggleForm'
     },
-    showForm: function(e) {
-      this.$el.find('form').fadeIn();
-    },
+
     initialize: function() {
+      this.visible = false;
       _.bindAll(this, 'render');
     },
+
+    toggleForm: function(e) {
+      this.visible = !this.visible;
+      $(e.target).html(this.visible ? "Hide form" : "Show form");
+      this.$el.find('form').fadeToggle();
+    },
+
     render: function() {
       this.$el.empty().append(this.template({}));
       return this;
