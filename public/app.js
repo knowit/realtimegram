@@ -1,5 +1,9 @@
 (function($, Backbone, _) {
-  var Image = Backbone.Model.extend({});
+  var Image = Backbone.Model.extend({
+    initialize: function() {
+      this.id = this.get('href');
+    }
+  });
   var Images = Backbone.Collection.extend({model: Image});
 
   var ImageList = Backbone.View.extend({
@@ -66,7 +70,6 @@
 
     var socket = io.connect('http://localhost');
     socket.on('img', function(path) {
-      console.log(path);
       images.add({
         href: path
       });
