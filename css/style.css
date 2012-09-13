@@ -75,25 +75,25 @@ h1 {
 
 /* CODE */
 #impress .codesample > pre {
-	padding: 10px;
+	padding: 10px 20px;
 	margin: 0;
 	border-radius: 10px;
+    border: 2px solid #000;
+    box-shadow: inset 0 0 10px 0 rgba(0,0,0,1);
 }
 #impress .step.codesample > pre {
-	line-height:1;
+	line-height:0.8;
 }
 
 #impress .codesample code{
-	font-size: 16px;
+	font-size: 24px;
     -webkit-font-smoothing: none;
 }
-
-
 
 /* COMMON STEP STYLES */
 
 .step {
-    width: 900px;
+    width: 1000px;
     padding: 40px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing:    border-box;

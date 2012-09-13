@@ -29,7 +29,25 @@
             <li>Separate your data from the DOM</li>
         </ul>
     </div>
-    <div id="node1" class="step slide" data-x="2500" data-y="-4000" >
+    <div id="backbonesample" class="step slide codesample" data-x="2500" data-y="-4000">
+        <pre class="language-javascript"><code class="language-javascript">MyView = Backbone.View.extend({
+    initialize: function() {
+        this.model.bind('change', this.render, this);
+    },
+    render: function() {
+        this.$el.text(this.model.get('text'));
+    }
+});
+var myModel = new Backbone.Model;
+newView = new MyView({
+    model: myModel
+});
+$('body').append(newView.el);
+myModel.set({
+    text: 'hello world!'
+});</code></pre>
+    </div>
+    <div id="node1" class="step slide" data-x="4000" data-y="-3000" >
         <h1>Node.js</h1>
         <ul>
             <li>JavaScript on the server, WAT?!</li>
@@ -38,32 +56,121 @@
         </ul>
     </div>
     <div id="node2" class="step slide codesample" data-x="4000" data-y="-4000" >
-        <h1>Node.js</h1>
-        <p>Basic web server</p>
-        <pre class="language-javascript">
-<code class="language-javascript">var http = require('http');
+        <pre class="language-javascript"><code class="language-javascript">var http = require('http');
+
 http.createServer(function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/plain'});
     res.end('Hello World!');
-}).listen(1337, '127.0.0.1');
-console.log('Server running at http://127.0.0.1:1337/');</code>
-        </pre>
+}).listen(3000, '127.0.0.1');
+
+console.log('Server running at http://127.0.0.1:3000/');</code></pre>
     </div>
-    <div id="node3" class="step slide" data-x="5500" data-y="-4000">
+    <div class="step slide" data-x="4000" data-y="-5000">
         <h1>Node.js</h1>
         <ul>
-            <li>Express - web application framework
+            <li>Express - Web application framework
             <li>Seaport - Service registry</li>
-            <li>Socket.IO/Faye - websocket streaming</li>
+            <li>Socket.IO - Websocket library </li>
         </ul>
     </div>
-    <div id="express" class="step slide" data-x="4000" data-y="-3000">
+    <div class="step slide" data-x="2500" data-y="-5000">
         <h1>Express</h1>
-        <p>Web framework</p>
+        <ul>
+            <li>HTTP helpers</li>
+            <li>Routing</li>
+            <li>Content negotiation</li>
+            <li>View/template engines</li>
+        </ul>
+    </div>
+    <div id="expressexample" class="step slide codesample" data-x="1000" data-y="-5000">
+        <pre><code class="language-javascript">var express = require('express');
+var app = express();
+
+app.set('view engine', 'jade');
+
+var people = [
+    { name: 'John Doe' },
+    { name: 'Jane Doe' }
+};
+
+app.get('/', function(req, res){
+    res.render('index', { people: people });
+});
+
+app.listen(3000);
+console.log('Listening on port 3000');</code></pre>
+    </div>
+    <div class="step slide codesample" data-x="1000" data-y="-6000" >
+        <pre class="language-javascript"><code class="language-javascript">var http = require('http');
+
+http.createServer(function (req, res) {
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.end('Hello World!');
+}).listen(3000, '127.0.0.1');
+
+console.log('Server running at http://127.0.0.1:3000/');</code></pre>
+    </div>
+    <div id="expressexampleoverlay" class="step slide codesample" data-x="1000" data-y="-5000">
+        <pre><code class="language-javascript">var express = require('express');
+var app = express();
+
+app.set('view engine', 'jade');
+
+var people = [
+    { name: 'John Doe' },
+    { name: 'Jane Doe' }
+};
+
+app.get('/', function(req, res){
+    res.render('index', { people: people });
+});
+
+app.listen(3000);
+console.log('Listening on port 3000');</code></pre>
+    </div>
+    <div class="step slide" data-x="-500" data-y="-5000">
+        <h1>Seaport</h1>
+        <p>The glue of the application</p>
+    </div>
+    <div class="step slide" data-x="-2000" data-y="-5000">
+        <h1>Socket.IO</h1>
+        <ul>
+            <li>Websocket made easy</li>
+            <li>Server and client library</li>
+        </ul>
+    </div>
+    <div class="step slide codesample" data-x="-3500" data-y="-5000">
+        <pre><code class="language-javascript">var io = require('socket.io');
+var express = require('express');
+
+var app = express(),
+    server = require('http').createServer(app),
+    io = io.listen(server);
+
+server.listen(80);
+
+io.sockets.on('connection', function (socket) {
+    socket.emit('news', { hello: 'world' });
+    socket.on('my other event', function (data) {
+        console.log(data);
+    });
+});</code></pre>
+    </div>
+    <div class="step slide codesample" data-x="-5000" data-y="-5000">
+        <pre><code class="language-javascript">&lt;script src="/socket.io/socket.io.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  var socket = io.connect('http://localhost');
+  socket.on('news', function (data) {
+    console.log(data);
+    socket.emit('my other event', { my: 'data' });
+  });
+&lt;/script&gt;
+</code></pre>
     </div>
     <div id="demo" class="step slide" data-x="0" data-y="0" data-scale="10" data-z="3000" data-rotate="360">
         <h1>DEMO</h1>
     </div>
+    <div id="overview" class="step" data-x="0" data-y="-1500" data-scale="10"></div>
 </div>
 <script src="js/prism.js"></script>
 <script src="js/impress.js"></script>
