@@ -3,7 +3,6 @@ var http = require('http');
 var express = require('express');
 var seaport = require('seaport');
 var socketio = require('socket.io');
-var shoe = require('shoe');
 
 var ports = seaport.connect('localhost', 5001);
 
