@@ -27,6 +27,8 @@ Demo the app
 
 * Present the app
  * Present the Frontend (Backbone app)
- * Present the two different backends
-  * Uploader
+ * Present the four different backends
+  * Static
+  * Downloader
   * Pusher
+  * Router
