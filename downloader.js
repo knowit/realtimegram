@@ -17,11 +17,10 @@ MAX_IMG_SIZE = 1024 * 2048;
 
 app.post('/', function(req, res) {
 	res.setHeader('content-length', 0);
-	res.redirect('/');
 
 	if(req['content-length'] > MAX_IMG_SIZE) {
 		res.statusCode = 413;
-		res.end();
+		res.redirect(413, '/');
 		return;
 	}
 
@@ -34,7 +33,7 @@ app.post('/', function(req, res) {
 		// "415 Unsupported Media Type"
 		if(!part.mime.match(/image/)) {
 			res.statusCode = 415;
-			res.end();
+			res.redirect(415, '/');
 			return;
 		}
 
@@ -65,7 +64,7 @@ app.post('/', function(req, res) {
 				// Redirect to the front page after upload
 				
 				// End response
-				res.end();
+				res.redirect('/');
 
 				// Update pusher about new upload
 				updatePusher(newName);
@@ -74,7 +73,7 @@ app.post('/', function(req, res) {
 
 		newFile.on('error', function() {
 			res.statusCode = 500;
-			res.end();
+			res.redirect(500, '/');
 			return;
 		});
 	};
