@@ -52,7 +52,7 @@ myModel.set({
         <ul>
             <li>JavaScript on the server, WAT?!</li>
             <li>V8, super fast</li>
-            <li>Epic ecosystem</li>
+            <li>Epic ecosystem with NPM</li>
         </ul>
     </div>
     <div id="node2" class="step slide codesample" data-x="4000" data-y="-4000" >
@@ -140,13 +140,13 @@ console.log('Listening on port 3000');</code></pre>
         </ul>
     </div>
     <div class="step slide codesample" data-x="-3500" data-y="-5000">
-        <pre><code class="language-javascript">var io = require('socket.io');
+        <pre><code class="language-javascript">var io = require('socket.io').listen(80);
 
 io.sockets.on('connection', function (socket) {
-    socket.emit('news', { hello: 'world' });
-    socket.on('my other event', function (data) {
-        console.log(data);
-    });
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
 });</code></pre>
     </div>
     <div class="step slide codesample" data-x="-5000" data-y="-5000">
