@@ -18,9 +18,6 @@ MAX_IMG_SIZE = 1024 * 2048;
 app.post('/', function(req, res) {
 	res.setHeader('content-length', 0);
 
-	// Make sure the user gets redirected back to the front page
-	res.setHeader('Location', '/wegeg');
-
 	if(req['content-length'] > MAX_IMG_SIZE) {
 		res.statusCode = 413;
 		res.end();
@@ -52,7 +49,7 @@ app.post('/', function(req, res) {
 		part.on('data', function(data) {
 			shasum.update(data);
 		});
-			
+
 		// When the file is written
 		newFile.on('end', function() {
 			// Rename image to hashed name to avoid name collisions
@@ -62,6 +59,9 @@ app.post('/', function(req, res) {
 			fs.rename(filePath, newPath, function(err) {
 				// Respond with a "201 Created"
 				res.statusCode = 201;
+				// Redirect to the front page after upload
+				res.redirect('/');
+				// End response
 				res.end();
 
 				// Update pusher about new upload
