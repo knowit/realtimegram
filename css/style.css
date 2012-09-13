@@ -143,6 +143,10 @@ h1 {
 	margin: -20px 0 0;
 }
 
+#niceness h1{
+    font-size: 90px;
+}
+
 /* DEMO */
 
 #demo {

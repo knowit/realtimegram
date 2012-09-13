@@ -160,6 +160,16 @@ io.sockets.on('connection', function (socket) {
 &lt;/script&gt;
 </code></pre>
     </div>
+    <div id="niceness" class="step slide codesample" data-x="-5000" data-y="-4000">
+        <h1>Node niceness</h1>
+        <ul>
+            <li>stream.pipe() - Connects readable streams to writable streams</li>
+            <li>File handling with the <em>filed</em> module</li>
+        </ul>
+        <pre><code class="language-javascript">var newFile = filed('/path/to/file');
+// formData is a stream created previously
+formData.pipe(newFile);</code></pre>
+    </div>
     <div id="demo" class="step slide" data-x="0" data-y="0" data-scale="10" data-z="3000" data-rotate="360">
         <h1>DEMO</h1>
     </div>
