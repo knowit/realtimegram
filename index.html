@@ -135,19 +135,12 @@ console.log('Listening on port 3000');</code></pre>
     <div class="step slide" data-x="-2000" data-y="-5000">
         <h1>Socket.IO</h1>
         <ul>
-            <li>Websocket made easy</li>
+            <li>Realtime made easy</li>
             <li>Server and client library</li>
         </ul>
     </div>
     <div class="step slide codesample" data-x="-3500" data-y="-5000">
         <pre><code class="language-javascript">var io = require('socket.io');
-var express = require('express');
-
-var app = express(),
-    server = require('http').createServer(app),
-    io = io.listen(server);
-
-server.listen(80);
 
 io.sockets.on('connection', function (socket) {
     socket.emit('news', { hello: 'world' });
