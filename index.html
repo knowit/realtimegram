@@ -27,24 +27,26 @@
         <ul>
             <li>Models, Collections, Views</li>
             <li>Separate your data from the DOM</li>
+            <li>Decouple your app with events</li>
         </ul>
     </div>
     <div id="backbonesample" class="step slide codesample" data-x="2500" data-y="-4000">
         <pre class="language-javascript"><code class="language-javascript">MyView = Backbone.View.extend({
     initialize: function() {
-        this.model.bind('change', this.render, this);
+        this.model.on('change', this.render, this);
     },
     render: function() {
-        this.$el.text(this.model.get('text'));
+        this.$el.text(this.model.get('title'));
+        return this;
     }
 });
 var myModel = new Backbone.Model;
 newView = new MyView({
     model: myModel
 });
-$('body').append(newView.el);
+$('body').append(newView.render().el);
 myModel.set({
-    text: 'hello world!'
+    title: 'hello world!'
 });</code></pre>
     </div>
     <div id="node1" class="step slide" data-x="4000" data-y="-3000" >
