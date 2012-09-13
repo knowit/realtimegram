@@ -5,10 +5,14 @@ var express = require('express');
 var formidable = require('formidable');
 var seaport = require('seaport');
 var socketio = require('socket.io-client');
+var request = require('request');
+var shoe = require('shoe');
 
 var ports = seaport.connect('localhost', 5001);
 
 var app = express();
+
+var pusherStream;
 
 app.post('/', function(req, res) {
 	res.setHeader('content-length', 0);
@@ -42,22 +46,12 @@ app.post('/', function(req, res) {
 });
 
 var updatePusher = function(filename) {
+	ports.get('privPusher@1.0.0', function(ps) {
 		// Open a Socket.IO connection to the pusher
-		var uri = 'http://' + 'localhost' + ':' + 15094;
+		var uri = 'http://' + ps[0].host + ':' + ps[0].port;
 
-		console.log(pusherSocket);
-
-		var pusherSocket = socketio.connect(uri);
-
-		pusherSocket.once('connect', function() {
-			console.log('connectedddd');
-			pusherSocket.emit('upload', filename);
-			pusherSocket.disconnect();
-		});
-
-		pusherSocket.on('disconnect', function () {
-			console.log('wuut');
-		});
+		request.post({uri: uri, json: {filename: filename}});
+	});
 };
 
 // Register a service with Seaport.

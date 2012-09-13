@@ -1,25 +1,27 @@
 var http = require('http');
 
+var express = require('express');
 var seaport = require('seaport');
 var socketio = require('socket.io');
+var shoe = require('shoe');
 
 var ports = seaport.connect('localhost', 5001);
 
 var server = http.createServer();
 var io = socketio.listen(server);
 
-var privServer = http.createServer();
-var privIo = socketio.listen(privServer);
+var privApp = express();
+privApp.use(express.bodyParser());
 
-ports.on('error', function(error) {
-	console.log('AFHAWOGFHESOGJWESG')
+privApp.post('/', function(req, res) {
+	console.log(req.body);
+	var filename = req.body.filename;
+	io.sockets.emit('img', filename);
+
+	res.end();
 });
 
-privIo.sockets.on('connection', function(privSocket) {
-	privSocket.on('upload', function(filename) {
-		io.sockets.emit('img', filename);
-	});
-});
+var privServer = http.createServer(privApp);
 
 ports.service('pusher@1.0.0', function(port, ready) {
 	server.listen(port, ready);
