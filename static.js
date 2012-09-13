@@ -15,14 +15,37 @@ var IMG_DIR = __dirname + '/uploads/';
 var ports = seaport.connect('localhost', 5001);
 var app = express();
 
+var getImages = function(dir, callback) {
+	fs.readdir(dir, function(err, filenames) {
+		if(err) callback(err, null);
+		// Get absolute paths
+		var paths = filenames.map(function(filename) {
+			return dir + filename;
+		});
+
+		// Get stat for all files
+		async.map(paths, fs.stat, function(err, stats) {
+			// Merge filename into stat object
+			var images = stats.map(function(stat, i) {
+				stat.filename = filenames[i];
+				return stat;
+			});
+			callback(err, images);
+		});
+	});
+};
+
 app.get('/', function(req, res) {
 	async.parallel({
-		files: async.apply(fs.readdir, IMG_DIR),
+		images: async.apply(getImages, IMG_DIR),
 		template: async.apply(fs.readFile, PUBLIC_DIR + '/index.html', 'utf8')
 	},
 	function(err, results) {
-		var imgs = results.files.map(function(img) {
-			return {href: img};
+		var imgs = results.images.map(function(image) {
+			return {
+				href: image.filename,
+				date: image.ctime
+			};
 		});
 
 		var data = {imgs: JSON.stringify(imgs)};

@@ -4,7 +4,12 @@
       this.id = this.get('href');
     }
   });
-  var Images = Backbone.Collection.extend({model: Image});
+  var Images = Backbone.Collection.extend({
+    model: Image,
+    comparator: function(model) {
+      return model.get('date');
+    }
+  });
 
   var ImageList = Backbone.View.extend({
     tagName: "ul",
@@ -17,6 +22,7 @@
     },
 
     render: function() {
+      this.$el.empty();
       this.addAll();
       return this;
     },
