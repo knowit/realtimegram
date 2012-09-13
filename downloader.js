@@ -22,7 +22,7 @@ app.post('/', function(req, res) {
 	form.onPart = function(part) {
 		// Make a new file with the same filename as the user's.
 		var filename = part.filename;
-		var newFile = filed('public/'+ filename);
+		var newFile = filed('uploads/'+ filename);
 
 		// Stream file to disk as it is being sent and parsed.
 		part.pipe(newFile);
