@@ -22,7 +22,7 @@ app.get('/', function(req, res) {
 	},
 	function(err, results) {
 		var imgs = results.files.map(function(img) {
-			return {href: '/images/' + img};
+			return {href: img};
 		});
 
 		var data = {imgs: JSON.stringify(imgs)};
