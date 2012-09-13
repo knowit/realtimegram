@@ -17,10 +17,12 @@ MAX_IMG_SIZE = 1024 * 2048;
 
 app.post('/', function(req, res) {
 	res.setHeader('content-length', 0);
+	res.redirect('/');
 
 	if(req['content-length'] > MAX_IMG_SIZE) {
 		res.statusCode = 413;
 		res.end();
+		return;
 	}
 
 	// Set up a parser to parse the binary multipart form data.
@@ -33,6 +35,7 @@ app.post('/', function(req, res) {
 		if(!part.mime.match(/image/)) {
 			res.statusCode = 415;
 			res.end();
+			return;
 		}
 
 		// Make a new file with the same filename as the user's.
@@ -60,7 +63,7 @@ app.post('/', function(req, res) {
 				// Respond with a "201 Created"
 				res.statusCode = 201;
 				// Redirect to the front page after upload
-				res.redirect('/');
+				
 				// End response
 				res.end();
 
@@ -72,6 +75,7 @@ app.post('/', function(req, res) {
 		newFile.on('error', function() {
 			res.statusCode = 500;
 			res.end();
+			return;
 		});
 	};
 
