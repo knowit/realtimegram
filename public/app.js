@@ -68,5 +68,13 @@
       {href: "http://mikecane.files.wordpress.com/2007/03/kitten.jpg"},
       {href: "http://2.bp.blogspot.com/_i2c_9pu-z7U/TRuZmhddnCI/AAAAAAAAAbU/l_PJB04fLU8/s1600/Sidebox-Kitten-Thinks-R.jpg"}
     ]);
+
+    var socket = io.connect('http://localhost');
+    socket.on('img', function(path) {
+      console.log(path);
+      images.add({
+        href: path
+      });
+    });
   });
 }(jQuery, Backbone, _));
