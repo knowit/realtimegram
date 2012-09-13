@@ -57,17 +57,12 @@
     }
   });
 
-  var images = new Images;
+  window.images = new Images;
   var uploadForm = new UploadForm().render();
   var imageList = new ImageList({collection: images});
 
   $(function() {
     $("#app").append(uploadForm.$el).append(imageList.$el);
-
-    images.reset([
-      {href: "http://mikecane.files.wordpress.com/2007/03/kitten.jpg"},
-      {href: "http://2.bp.blogspot.com/_i2c_9pu-z7U/TRuZmhddnCI/AAAAAAAAAbU/l_PJB04fLU8/s1600/Sidebox-Kitten-Thinks-R.jpg"}
-    ]);
 
     var socket = io.connect('http://localhost');
     socket.on('img', function(path) {
