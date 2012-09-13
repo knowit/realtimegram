@@ -1,16 +1,29 @@
 Realtimegram
 ============
 
-Agenda:
+300 lines of instagrammin'
+--------------------------
 
-* Present libraries/frameworks used
-  * Backbone
-  * Underscore
-  * Node
+Backbone.js
+-----------
+* Models, Collections, Views
+* MVC, yet not (no Controller per sé)
 
-* Demo the app
-  * Upload image
-  * See that it streams nicely to the clients :)
+Node.js
+-------
+* JavaScript on the server
+* Google V8
+* async/non-blocking
+
+Node frameworks
+* Express
+* Seaport
+* Faye
+
+Demo the app
+------------
+* Upload image
+* See that it streams nicely to the clients
 
 * Present the app
  * Present the Frontend (Backbone app)

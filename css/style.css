@@ -1,0 +1,164 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+body {
+    font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+    min-height: 740px;
+    background: rgb(55, 55, 55);
+    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 500, from(rgb(55, 55, 55)), to(rgb(35, 35, 35)));
+    background: -webkit-radial-gradient(rgb(55, 55, 55), rgb(35, 35, 35));
+    background:    -moz-radial-gradient(rgb(55, 55, 55), rgb(35, 35, 35));
+    background:      -o-radial-gradient(rgb(55, 55, 55), rgb(35, 35, 35));
+    background:         radial-gradient(rgb(55, 55, 55), rgb(35, 35, 35));
+    -webkit-font-smoothing: antialiased;
+    color: #eee;
+	text-shadow: 0 2px 5px rgba(0,0,0,.5);
+	font-weight: 400;
+}
+
+/* enable clicking on elements 'hiding' behind body in 3D */
+body     { pointer-events: none; }
+#impress { pointer-events: auto; }
+
+h1 {
+	font-family: 'Volkhov', serif;
+}
+
+/* CODE */
+#impress .codesample > pre {
+	padding: 10px;
+	margin: 0;
+	border-radius: 10px;
+}
+#impress .step.codesample > pre {
+	line-height:1;
+}
+
+#impress .codesample code{
+	font-size: 16px;
+    -webkit-font-smoothing: none;
+}
+
+
+
+/* COMMON STEP STYLES */
+
+.step {
+    width: 900px;
+    padding: 40px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing:    border-box;
+    -ms-box-sizing:     border-box;
+    -o-box-sizing:      border-box;
+    box-sizing:         border-box;
+    font-size: 48px;
+    line-height: 1.5;
+    opacity: 0.4;
+}
+
+.step {
+    -webkit-transition: opacity 0.3s;
+    -moz-transition:    opacity 0.3s;
+    -ms-transition:     opacity 0.3s;
+    -o-transition:      opacity 0.3s;
+    transition:         opacity 0.3s;
+}
+
+.step.present {
+	opacity: 1;
+}
+
+/* COMMON SLIDES */
+
+.slide h1 {
+	font-weight: 700;
+	font-size: 3em;
+}
+
+.slide ul {
+	margin: 0 0.5em;
+	list-style: disc;
+}
+
+/* TITLESCREEN */
+
+#titlescreen {
+	width: 1000px;
+}
+#titlescreen h1 {
+	font-size: 120px;
+	margin: 0;
+}
+
+#titlescreen h2 {
+	margin: -20px 0 0;
+}
+
+/* DEMO */
+
+#demo {
+	opacity: 0;
+}
+
+#demo.active {
+	opacity: 1;
+    -webkit-transition: opacity 0.2s;
+    -moz-transition:    opacity 0.2s;
+    -ms-transition:     opacity 0.2s;
+    -o-transition:      opacity 0.2s;
+    transition:         opacity 0.2s;
+}
+
+#demo h1 {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 250px;
+}
