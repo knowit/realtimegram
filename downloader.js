@@ -4,9 +4,7 @@ var filed = require('filed');
 var express = require('express');
 var formidable = require('formidable');
 var seaport = require('seaport');
-var socketio = require('socket.io-client');
 var request = require('request');
-var shoe = require('shoe');
 
 var ports = seaport.connect('localhost', 5001);
 
