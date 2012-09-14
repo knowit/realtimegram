@@ -166,3 +166,15 @@ h1 {
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 250px;
 }
+
+#overview {
+    opacity: 0;
+}
+#overview.active {
+    opacity: 1;
+}
+#overview p {
+    background: #000;
+    border-radius: 5px;
+    padding: 20px;
+}
