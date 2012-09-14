@@ -71,7 +71,8 @@ header h1 {
 }
 
 .images .image img {
-	width: 100%;
+  width: 100%;
+  cursor: pointer;
 }
 
 @media screen and (max-width : 480px) {
