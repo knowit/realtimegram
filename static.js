@@ -15,7 +15,7 @@ var IMG_DIR = __dirname + '/uploads/';
 var ports = seaport.connect('localhost', 5001);
 var app = express();
 
-var getImages = function(dir, callback) {
+var getImages = function(dir, amount, callback) {
 	fs.readdir(dir, function(err, filenames) {
 		if(err) callback(err, null);
 		// Get absolute paths
@@ -30,14 +30,20 @@ var getImages = function(dir, callback) {
 				stat.filename = filenames[i];
 				return stat;
 			});
-			callback(err, images);
+
+			// Sort images by create date
+			images.sort(function(image) {
+				return -image.ctime;
+			});
+
+			callback(err, images.slice(0, amount));
 		});
 	});
 };
 
 app.get('/', function(req, res) {
 	async.parallel({
-		images: async.apply(getImages, IMG_DIR),
+		images: async.apply(getImages, IMG_DIR, 10),
 		template: async.apply(fs.readFile, PUBLIC_DIR + '/index.html', 'utf8')
 	},
 	function(err, results) {
