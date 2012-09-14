@@ -45,6 +45,10 @@
     tagName: "li",
     className: 'image',
 
+    events: {
+      "click": "showAlert"
+    },
+
     initialize: function() {
       this.model.on("change", this.render, this);
     },
@@ -52,6 +56,10 @@
     render: function() {
       this.$el.empty().append(this.template(this.model.toJSON()));
       return this;
+    },
+
+    showAlert: function() {
+      window.open("/images/" + this.model.get("href"));
     }
   });
 
