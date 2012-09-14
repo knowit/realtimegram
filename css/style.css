@@ -87,7 +87,7 @@ h1 {
 
 #impress .codesample code{
 	font-size: 24px;
-    -webkit-font-smoothing: none;
+    -webkit-font-smoothing: antialiased;
 }
 
 /* COMMON STEP STYLES */
