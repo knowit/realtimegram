@@ -1,6 +1,5 @@
 # SCRIPT
 
-
 ## Short introduction of the project
 
 ### Slide 1
@@ -19,6 +18,10 @@
   * Has Models and Views, but also Collections - basically ordered sets of models, but has a lot more too!
   * Collections and models can tie up to RESTful apis for some nice async data fetching and updating
   * Data <> DOM separation => maintainable code that's not tied to DOM elements
+  * Saves your app from turning into a big ball of jQuery spagetthi
+  * Provides a simple event mechanism for communication between different areas of your application
+  * Doesn't consume your whole application - use it where you see fit
+  * It's under 6kb of compressed JS - a small dependency for any app
 
 ### Slide 4
 Example code, walk through
@@ -39,9 +42,9 @@ Example web server
 Short list of frameworks used in Node
 
 ### Slide 8
-Express
+
 * Small, but powerful web framework
-* Has all the features you would expect a framework
+* Has all the features you would expect from a framework
   * HTTP Helper methods like redirection, caching, request and response handling etc
   * A robust routing engine
   * Content negotiation
