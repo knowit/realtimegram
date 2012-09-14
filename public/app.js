@@ -97,10 +97,8 @@
     $("#app").append(uploadForm.$el).append(imageList.$el);
 
     var socket = io.connect('http://localhost');
-    socket.on('img', function(path) {
-      images.add({
-        href: path
-      });
+    socket.on('img', function(img) {
+      images.add(img);
     });
   });
 }(jQuery, Backbone, _));

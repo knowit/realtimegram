@@ -13,19 +13,21 @@ var privApp = express();
 privApp.use(express.bodyParser());
 
 privApp.post('/', function(req, res) {
-	console.log(req.body);
-	var filename = req.body.filename;
-	io.sockets.emit('img', filename);
+  var href = req.body.filename;
+  io.sockets.emit('img', {
+    href: href,
+    date: +new Date()
+  });
 
-	res.end();
+  res.end();
 });
 
 var privServer = http.createServer(privApp);
 
 ports.service('pusher@1.0.0', function(port, ready) {
-	server.listen(port, ready);
+  server.listen(port, ready);
 });
 
 ports.service('privPusher@1.0.0', function(port, ready) {
-	privServer.listen(port, ready);
+  privServer.listen(port, ready);
 });
