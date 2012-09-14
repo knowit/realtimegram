@@ -45,6 +45,10 @@
     tagName: "li",
     className: 'image',
 
+    initialize: function() {
+      this.model.on("change", this.render, this);
+    },
+
     render: function() {
       this.$el.empty().append(this.template(this.model.toJSON()));
       return this;
