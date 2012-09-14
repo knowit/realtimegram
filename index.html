@@ -19,6 +19,12 @@
         <h1>Realtimegram</h1>
         <h2>300 lines of realtime instagrammin'</h2>
     </div>
+    <div id="people" class="step" data-x="-1000" data-y="0" data-scale="3">
+        <h1>The people standing in front of you</h1>
+        <h2>Jesper Haug Karsrud</h2>
+        <h2>Bjørn Arild Mæland</h2>
+        <h2>David Ed Mellum<h2>
+    </div>
     <div class="step slide" data-rotate="90" data-x="2500" data-y="-1500">
         <h1>Backbone.js<br />Node.js<h1>
     </div>
@@ -88,47 +94,48 @@ console.log('Server running at http://127.0.0.1:3000/');</code></pre>
         <pre><code class="language-javascript">var express = require('express');
 var app = express();
 
-app.set('view engine', 'jade');
-
 var people = [
     { name: 'John Doe' },
     { name: 'Jane Doe' }
-};
+];
 
 app.get('/', function(req, res){
     res.render('index', { people: people });
 });
 
-app.listen(3000);
-console.log('Listening on port 3000');</code></pre>
+app.listen(3000);</code></pre>
     </div>
     <div class="step slide codesample" data-x="1000" data-y="-6000" >
         <pre class="language-javascript"><code class="language-javascript">var http = require('http');
+var jade = require('jade');
+var app = http.createServer();
 
-http.createServer(function (req, res) {
+var people = [
+    { name: 'John Doe' },
+    { name: 'Jane Doe' }
+];
+
+app.on('request', function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.end('Hello World!');
-}).listen(3000, '127.0.0.1');
+    res.end(jade.renderFile('index.jade', {people: people}));
+});
 
-console.log('Server running at http://127.0.0.1:3000/');</code></pre>
+app.listen(3000);</code></pre>
     </div>
     <div id="expressexampleoverlay" class="step slide codesample" data-x="1000" data-y="-5000">
         <pre><code class="language-javascript">var express = require('express');
 var app = express();
 
-app.set('view engine', 'jade');
-
 var people = [
     { name: 'John Doe' },
     { name: 'Jane Doe' }
-};
+];
 
 app.get('/', function(req, res){
     res.render('index', { people: people });
 });
 
-app.listen(3000);
-console.log('Listening on port 3000');</code></pre>
+app.listen(3000);</code></pre>
     </div>
     <div class="step slide" data-x="-500" data-y="-5000">
         <h1>Seaport</h1>
