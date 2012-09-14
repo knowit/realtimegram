@@ -1,8 +1,11 @@
 var bouncy = require('bouncy');
 var seaport = require('seaport');
 
+// Create a Seaport server. This is where all our services
+// will hook  in.
 var ports = seaport.createServer().listen(5001);
 
+// Create a proxy to route incoming requests.
 bouncy(function (req, bounce) {
     // What service do we need to handle the request?
     var service = 'static'; // default to static
@@ -12,6 +15,8 @@ bouncy(function (req, bounce) {
         service = 'downloader';
     }
 
+    // Map up subdomains to versions of our services so
+    // we can access unstable versions easily.
     var domains = (req.headers.host || '').split('.');
     var versions = {
         unstable : '1.1.x',
@@ -20,13 +25,13 @@ bouncy(function (req, bounce) {
     var selectedVersion = versions[domains[0]];
     var fullService = service + '@' + (selectedVersion || '1.0.x');
     
+    // Query the Seaport server for the service
     var ps = ports.query(fullService);
     
     if (ps.length === 0) {
         var res = bounce.respond();
         res.end('service not available\n');
-    }
-    else {
+    } else {
         bounce(ps[0].host, ps[0].port);
     }
 }).listen(5000);
