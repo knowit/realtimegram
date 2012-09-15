@@ -15,6 +15,10 @@ var IMG_DIR = __dirname + '/uploads/';
 var ports = seaport.connect('localhost', 5001);
 var app = express();
 
+app.configure(function() {
+  app.use("/images", express.static(__dirname + '/uploads', { maxAge: 3600 * 100000 }));
+});
+
 var getImages = function(dir, amount, callback) {
 	fs.readdir(dir, function(err, filenames) {
 		if(err) callback(err, null);
@@ -59,11 +63,6 @@ app.get('/', function(req, res) {
 
 		res.end(html);
 	});
-});
-
-app.get('/images/:filename', function(req, res) {
-	var filename = req.params.filename;
-	filed(IMG_DIR + filename).pipe(res);
 });
 
 app.get('*', function(req, res) {
